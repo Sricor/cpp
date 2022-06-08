@@ -20,8 +20,11 @@ public:
     void showMenu();           // 展示菜单
     void initStaff();          // 初始化员工
     void saveFile();           // 保存文件
+    int isStaffExist(int id);  // 判断员工存在
     void addStaff();           // 添加员工
     void viewStaff();          // 查看员工
+    void removeStaff();        // 删除员工
+    void modifyStaff();        // 修改员工
     void exitSystem();         // 退出系统
     virtual ~StaffManager();
 };

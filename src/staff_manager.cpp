@@ -33,7 +33,11 @@ StaffManager::StaffManager()
     this->initStaff();
     ifs.close();
 
+    
+    
     return;
+
+    std::cout << this->isStaffExist(1) << std::endl;  // 测试员工是否存在
 
     // 初始化测试代码
     for (int i = 0; i < this->staff_num; i++)
@@ -111,6 +115,20 @@ void StaffManager::saveFile()
     ofs.close();
 }
 
+int StaffManager::isStaffExist(int id)
+{
+    int index = -1;
+    for (int i = 0; i < this->staff_num; i++)
+    {
+       if (this->staff_arr[i]->staff_id == id)
+       {
+           index = i;
+           break;
+       }
+    }
+    return index;
+}
+
 void StaffManager::addStaff()
 {
     int addNum = 0;
@@ -183,6 +201,77 @@ void StaffManager::viewStaff()
         for (int i = 0; i < this->staff_num; i++)
         {
             this->staff_arr[i]->showInfo(); // 查看员工信息
+        }
+    }
+}
+
+void StaffManager::removeStaff()
+{
+    int id = 0;
+    int index = 0;
+    if (!this->file_real){ std::cout << FILENAME <<"File not found or content is empty" << std::endl; }  // 文件为空
+    else
+    {
+        std::cout << "Please enter staff ID to remove: ";
+        std::cin  >> id;
+        index = this->isStaffExist(id); // 获取待删除员工编号所在的下标
+        if (index == -1) { std::cout << "Remove staff error, staff id not found" << std::endl;}
+        else
+        {
+            for (int i = index; i < this->staff_num - 1; i++)
+            {
+               this->staff_arr[i] = this->staff_arr[i + 1]; // 数组前移
+            }
+            this->staff_num--; // 更新员工数
+            this->saveFile();  // 保存数据至文件
+
+            std::cout << "Remove staff succes " << std::endl;
+        }
+    }
+}
+
+void StaffManager::modifyStaff()
+{
+    int id = 0;
+    int index = 0;
+    if (!this->file_real){ std::cout << FILENAME <<"File not found or content is empty" << std::endl; }  // 文件为空
+    else
+    {
+        std::cout << "Please enter staff ID to modify: ";
+        std::cin  >> id;
+        index = this->isStaffExist(id);     // 获取待修改员工编号所在的下标
+        if (index == -1) { std::cout << "Modify staff error, staff id not found" << std::endl;}
+        else
+        {
+            delete this->staff_arr[index];
+            
+            int newID = 0;
+            int newPosition = 1;
+            std::string newName = "";
+            Staff *p = NULL;
+
+            std::cout << "Plase enter the new staff id: ";
+            std::cin  >> newID;
+
+            std::cout << "Plase enter the  new  staff name: ";
+            std::cin  >> newName;
+
+            std::cout << "Plase enter the new staff position ";
+            std::cout << "1: Normal  2: Manager  3: Boss : ";
+            std::cin  >> newPosition;
+            std::cout << std::endl;
+
+            switch (newPosition)
+            {
+            case 1:  p = new NormalStaff(newID, newName);  break;
+            case 2:  p = new ManagerStaff(newID, newName); break;
+            case 3:  p = new BossStaff(newID, newName);    break;
+            default: break;
+            }
+
+            this->staff_arr[index] = p;    // 更新数据
+            this->saveFile();              // 保存数据
+            std::cout << "Modify staff succes " << std::endl;
         }
     }
 }
