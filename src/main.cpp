@@ -9,12 +9,6 @@ using namespace std;
 
 void test()
 {
-    
-/*     Staff *p;
-    p = new NormalStaff(1, "Hello");
-    p->showInfo(); */
-
-
     StaffManager sm;
     int comd = 0;
     while (true)
@@ -25,8 +19,9 @@ void test()
         switch (comd)
         {
         default: break;
-        case 0: sm.exitSystem();
-        case 1: sm.addStaff();
+        case 0: sm.exitSystem(); break;
+        case 1: sm.addStaff();   break;
+        case 2: sm.viewStaff();  break;
         }
     }
 }
