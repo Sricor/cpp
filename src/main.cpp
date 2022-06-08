@@ -10,9 +10,9 @@ using namespace std;
 void test()
 {
     
-    Staff *p;
+/*     Staff *p;
     p = new NormalStaff(1, "Hello");
-    p->showInfo();
+    p->showInfo(); */
 
 
     StaffManager sm;
@@ -26,6 +26,7 @@ void test()
         {
         default: break;
         case 0: sm.exitSystem();
+        case 1: sm.addStaff();
         }
     }
 }

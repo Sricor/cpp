@@ -11,7 +11,7 @@ void BossStaff::showInfo()
 {
     std::cout << "Staff ID: "   << this->staff_id
               << " Name: "      << this->staff_name
-              << " Position: "  << "Boss" 
+              << " Position: "  << "Boss " 
               << std::endl;
 }
 
