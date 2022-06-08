@@ -175,7 +175,7 @@ void StaffManager::addStaff()
         default: break;
         }
         newStaffArr[this->staff_num + i] = p;
-        // delete p;        // 测试代码 后面修改
+        delete p;        // 测试代码 后面修改
     }
 
     for (int i = 0; i < addNum; i++)
@@ -274,6 +274,11 @@ void StaffManager::modifyStaff()
             std::cout << "Modify staff succes " << std::endl;
         }
     }
+}
+
+void StaffManager::searchStaff()
+{
+    
 }
 
 void StaffManager::exitSystem()

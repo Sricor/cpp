@@ -7,7 +7,7 @@
 #include "manager_staff.h"
 #include "boss_staff.h"
 
-#define FILENAME "staff.txt"
+#define FILENAME "staff.txt"   // 文件名
 
 class StaffManager
 {
@@ -25,6 +25,7 @@ public:
     void viewStaff();          // 查看员工
     void removeStaff();        // 删除员工
     void modifyStaff();        // 修改员工
+    void searchStaff();        // 查找员工
     void exitSystem();         // 退出系统
     virtual ~StaffManager();
 };
